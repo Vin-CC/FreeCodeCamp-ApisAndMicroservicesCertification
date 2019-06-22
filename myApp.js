@@ -70,16 +70,18 @@ function handler(req, res) {
     let last = req.query.last;
     res.json({ name: first + " " + last});
 };
-app.route('/name').get(handler).post(handler);
+//app.route('/name').get(handler).post(handler);
   
 /** 11) Get ready for POST Requests - the `body-parser` */
 // place it before all the routes !
 
 
 /** 12) Get data form POST  */
-
-
-
+app.post('/name', function(req, res) {
+    let first = req.body.first;
+    let last = req.body.last;
+    res.json({ name: first + " " + last});
+});
 // This would be part of the basic setup of an Express app
 // but to allow FCC to run tests, the server is already active
 /** app.listen(process.env.PORT || 3000 ); */
