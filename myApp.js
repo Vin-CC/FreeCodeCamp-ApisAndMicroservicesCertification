@@ -15,34 +15,46 @@ app.use(function (req, res, next) {
 /** 1) Meet the node console. */
 console.log("Hello World");
 
+
 /** 2) A first working Express Server */
 /*app.get("/", function (req, res) {
     res.send("Response String");
 });*/
+
 
 /** 3) Serve an HTML file */
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/views/index.html");
 });
 
+
 /** 4) Serve static assets  */
 app.use(express.static(__dirname + "/public"));
+
 
 /** 5) serve JSON on a specific route */
 app.get("/json", function (req, res) {
     res.json({"message": "Hello json"});
 });
 
+
 /** 6) Use the .env file to configure the app */
 /*app.get("/json", function (req, res) {
     res.json({"message": process.env});
 });*/
- 
+
+
 /** 7) Root-level Middleware - A logger */
 //  place it before all the routes !
 
-/** 8) Chaining middleware. A Time server */
 
+/** 8) Chaining middleware. A Time server */
+app.get('/now', function(req, res, next) {
+    req.time = new Date().toString();
+    next();
+}, function(req, res) {
+    res.json({time: req.time});
+});
 
 /** 9)  Get input from client - Route parameters */
 
